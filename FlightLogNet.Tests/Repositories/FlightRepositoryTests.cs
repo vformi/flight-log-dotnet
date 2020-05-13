@@ -70,7 +70,7 @@ namespace FlightLogNet.Tests.Repositories
 
 			// Assert
 			Assert.True(result.Count == 3, "In test database is 3 flight starts");
-			Assert.True(flights[0] == null, "Last flight start should have null glider.");
+			Assert.True(flights[4] == null, "Last flight start should have null glider.");
 		}
 	}
 }
