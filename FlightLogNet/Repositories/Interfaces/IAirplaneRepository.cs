@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Repositories.Interfaces
 {
     using System.Collections.Generic;
+
     using FlightLogNet.Models;
 
     public interface IAirplaneRepository

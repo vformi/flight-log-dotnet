@@ -2,10 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using AutoMapper;
+
     using FlightLogNet.Models;
     using FlightLogNet.Repositories.Entities;
     using FlightLogNet.Repositories.Interfaces;
+
     using Microsoft.EntityFrameworkCore;
 
     public class FlightRepository : IFlightRepository

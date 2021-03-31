@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Facades
 {
     using System.Collections.Generic;
+
     using FlightLogNet.Models;
     using FlightLogNet.Operation;
     using FlightLogNet.Repositories.Interfaces;

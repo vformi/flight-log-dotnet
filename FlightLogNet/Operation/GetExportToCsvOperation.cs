@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Globalization;
+
     using FlightLogNet.Models;
     using FlightLogNet.Repositories.Interfaces;
 

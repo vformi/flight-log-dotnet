@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Integration
 {
     using System.Collections.Generic;
+
     using FlightLogNet.Models;
 
     public interface IClubUserDatabase

@@ -1,8 +1,10 @@
 ﻿namespace FlightLogNet.Controllers
 {
     using System.Collections.Generic;
+
     using FlightLogNet.Facades;
     using FlightLogNet.Models;
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 

@@ -2,7 +2,9 @@
 {
     using System;
     using System.Linq.Expressions;
+
     using AutoMapper;
+
     using FlightLogNet.Integration;
     using FlightLogNet.Models;
     using FlightLogNet.Repositories.Entities;

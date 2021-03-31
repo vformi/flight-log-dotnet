@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Operation
 {
     using System.Collections.Generic;
+
     using FlightLogNet.Integration;
     using FlightLogNet.Models;
     using FlightLogNet.Repositories.Interfaces;
@@ -40,7 +41,7 @@
                 return this.personRepository.CreateClubMember(clubUser);
             }
 
-            throw new KeyNotFoundException("Person not found");
+            throw new KeyNotFoundException("Person is not guest and Person not found in internal Database.");
         }
     }
 }

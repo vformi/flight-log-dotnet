@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Repositories.Entities
 {
     using System;
+
     using FlightLogNet.Models;
 
     public class Flight

@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Operation
 {
     using System;
+
     using FlightLogNet.Models;
     using FlightLogNet.Repositories.Interfaces;
 

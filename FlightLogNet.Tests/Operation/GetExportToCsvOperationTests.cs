@@ -1,28 +1,32 @@
-using FlightLogNet.Operation;
-using Xunit;
-
 namespace FlightLogNet.Tests.Operation
 {
-	public class GetExportToCsvOperationTests
-	{
-		private readonly GetExportToCsvOperation getExportToCsvOperation;
+    using System;
+    using System.Text;
 
-		public GetExportToCsvOperationTests(GetExportToCsvOperation getExportToCsvOperation)
-		{
-			this.getExportToCsvOperation = getExportToCsvOperation;
-		}
+    using FlightLogNet.Operation;
 
-		// TODO 6.1: Odstraòtì skip a doplntì test, aby otestoval vrácený CSV soubor.
-		[Fact(Skip = "Not implemented.")]
-		public void Execute_StateUnderTest_ExpectedBehavior()
-		{
-			// Arrange
+    using Xunit;
 
-			// Act
-			var result = getExportToCsvOperation.Execute();
+    public class GetExportToCsvOperationTests
+    {
+        private readonly GetExportToCsvOperation getExportToCsvOperation;
 
-			// Assert
-			//Assert.Equal(expectedCsv, result);
-		}
-	}
+        public GetExportToCsvOperationTests(GetExportToCsvOperation getExportToCsvOperation)
+        {
+            this.getExportToCsvOperation = getExportToCsvOperation;
+        }
+
+        // TODO 6.1: Odstraòtì skip a doplntì test, aby otestoval vrácený CSV soubor.
+        [Fact(Skip = "Not implemented.")]
+        public void Execute_StateUnderTest_ExpectedBehavior()
+        {
+            // Arrange
+
+            // Act
+            var result = getExportToCsvOperation.Execute();
+
+            // Assert
+            //Assert.Equal(expectedCsv, result);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 namespace FlightLogNet
 {
     using AutoMapper;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -58,6 +59,11 @@ namespace FlightLogNet
                 app.UseDeveloperExceptionPage();
                 TestDatabaseGenerator.RenewDatabase();
             }
+            else
+            {
+                using var dbContext = new Repositories.LocalDatabaseContext();
+                dbContext.Database.EnsureCreated();
+            }
 
             app.UseHttpsRedirection();
 
@@ -65,8 +71,7 @@ namespace FlightLogNet
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
 

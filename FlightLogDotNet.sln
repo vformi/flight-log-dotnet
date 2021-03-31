@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightLogNet", "FlightLogNe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightLogNet.Tests", "FlightLogNet.Tests\FlightLogNet.Tests.csproj", "{4EE754F4-E630-4C0B-B9F8-D6B744B61C8A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D9F2632-B52D-4BE7-B3F2-A1CC0687FA1C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{069E1EE1-D986-47AA-8132-C3E9C690072C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection

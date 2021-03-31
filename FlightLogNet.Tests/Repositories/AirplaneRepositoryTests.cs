@@ -1,61 +1,63 @@
-using AutoMapper;
-using FlightLogNet.Models;
-using FlightLogNet.Repositories;
-using Xunit;
-
 namespace FlightLogNet.Tests.Repositories
 {
-	public class AirplaneRepositoryTests
-	{
-		private readonly IMapper mapper;
+    using AutoMapper;
 
-		public AirplaneRepositoryTests(IMapper mapper)
-		{
-			this.mapper = mapper;
-		}
+    using FlightLogNet.Models;
+    using FlightLogNet.Repositories;
 
-		private AirplaneRepository CreateAirplaneRepository()
-		{
-			return new AirplaneRepository(mapper);
-		}
+    using Xunit;
 
-		private void RenewDatabase()
-		{
-			TestDatabaseGenerator.CreateTestDatabase();
-		}
+    public class AirplaneRepositoryTests
+    {
+        private readonly IMapper mapper;
 
-		[Fact]
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "StringLiteralTypo")]
-		public void AddGuestAirplane_StateUnderTest_ExpectedBehavior()
-		{
-			// Arrange
-			RenewDatabase();
-			var airplaneRepository = CreateAirplaneRepository();
-			AirplaneModel airplaneModel = new AirplaneModel
-			{
-				Immatriculation = "OKA-424",
-				Type = "Zlín"
-			};
+        public AirplaneRepositoryTests(IMapper mapper)
+        {
+            this.mapper = mapper;
+        }
 
-			// Act
-			var result = airplaneRepository.AddGuestAirplane(airplaneModel);
+        private AirplaneRepository CreateAirplaneRepository()
+        {
+            return new AirplaneRepository(mapper);
+        }
 
-			// Assert
-			Assert.True(result > 0, "There should be Id (> 0) of new guest airplane.");
-		}
+        private void RenewDatabase()
+        {
+            TestDatabaseGenerator.RenewDatabase();
+        }
 
-		[Fact]
-		public void GetClubAirplanes_StateUnderTest_ExpectedBehavior()
-		{
-			// Arrange
-			RenewDatabase();
-			var airplaneRepository = CreateAirplaneRepository();
+        [Fact]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "StringLiteralTypo")]
+        public void AddGuestAirplane_StateUnderTest_ExpectedBehavior()
+        {
+            // Arrange
+            RenewDatabase();
+            var airplaneRepository = CreateAirplaneRepository();
+            AirplaneModel airplaneModel = new AirplaneModel
+            {
+                Immatriculation = "OKA-424",
+                Type = "Zlín"
+            };
 
-			// Act
-			var result = airplaneRepository.GetClubAirplanes();
+            // Act
+            var result = airplaneRepository.AddGuestAirplane(airplaneModel);
 
-			// Assert
-			Assert.NotEmpty(result);
-		}
-	}
+            // Assert
+            Assert.True(result > 0, "There should be Id (> 0) of new guest airplane.");
+        }
+
+        [Fact]
+        public void GetClubAirplanes_StateUnderTest_ExpectedBehavior()
+        {
+            // Arrange
+            RenewDatabase();
+            var airplaneRepository = CreateAirplaneRepository();
+
+            // Act
+            var result = airplaneRepository.GetClubAirplanes();
+
+            // Assert
+            Assert.NotEmpty(result);
+        }
+    }
 }

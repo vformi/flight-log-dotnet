@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Repositories
 {
     using FlightLogNet.Repositories.Entities;
+
     using Microsoft.EntityFrameworkCore;
 
     public class LocalDatabaseContext : DbContext

@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using FlightLogNet.Models;
 
     public class ClubUserDatabaseStub : IClubUserDatabase

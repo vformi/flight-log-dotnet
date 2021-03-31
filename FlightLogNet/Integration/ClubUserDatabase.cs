@@ -2,9 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using AutoMapper;
+
     using FlightLogNet.Models;
+
     using Microsoft.Extensions.Configuration;
+
     using RestSharp;
 
     public class ClubUserDatabase : IClubUserDatabase
@@ -33,7 +37,7 @@
 
         private IList<PersonModel> TransformToPersonModel(IList<ClubUser> users)
         {
-	        return null;
+            return null;
         }
     }
 }

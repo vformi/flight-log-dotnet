@@ -1,6 +1,7 @@
 ﻿namespace FlightLogNet.Repositories
 {
     using System.Linq;
+
     using FlightLogNet.Models;
     using FlightLogNet.Repositories.Entities;
     using FlightLogNet.Repositories.Interfaces;

@@ -5,6 +5,7 @@
     using FlightLogNet.Operation;
     using FlightLogNet.Repositories;
     using FlightLogNet.Repositories.Interfaces;
+
     using Microsoft.Extensions.DependencyInjection;
 
     internal class InjectConfiguration
