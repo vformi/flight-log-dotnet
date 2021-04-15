@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <!-- 
+          Cobertura - create test coverage reports in Azure Devops (Opencover not supported),
+          Opencover - create test coverage reports in Sonar (Cobertura not supported).
+          -->
+          <Format>cobertura,opencover</Format>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
