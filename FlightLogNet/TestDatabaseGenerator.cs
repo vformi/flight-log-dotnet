@@ -38,13 +38,13 @@ namespace FlightLogNet
             dbContext.Persons.AddRange(
                 new Person { FirstName = "Kamila", LastName = "Spoustová", Address = null },
                 new Person { FirstName = "Naděžda", LastName = "Pavelková", Address = null },
-                new Person { FirstName = "Silvie", LastName = "Hronová", Address = null, Id = 3 },
+                new Person { FirstName = "Silvie", LastName = "Hronová", Address = null, Id = 103 },
                 new Person { FirstName = "Miloš", LastName = "Korbel", Address = null },
-                new Person { FirstName = "Petr", LastName = "Hrubec", Address = null, Id = 5 },
+                new Person { FirstName = "Petr", LastName = "Hrubec", Address = null, Id = 105 },
                 new Person { FirstName = "Michal", LastName = "Vyvlečka", Address = null },
                 new Person
                 {
-                    Id = 12,
+                    Id = 112,
                     FirstName = "Lenka",
                     LastName = "Kiasová",
                     Address = new Address { City = null, Country = null, PostalCode = null, Street = null }
@@ -75,7 +75,7 @@ namespace FlightLogNet
                     TakeoffTime = now.AddMinutes(-10),
                     LandingTime = null,
                     Airplane = dbContext.Airplanes.Find(1L),
-                    Pilot = dbContext.Persons.Find(12L),
+                    Pilot = dbContext.Persons.Find(112L),
                     Copilot = null,
                     Task = "VLEK",
                     Type = FlightType.Glider
@@ -86,7 +86,7 @@ namespace FlightLogNet
                     TakeoffTime = now.AddMinutes(-10),
                     LandingTime = null,
                     Airplane = dbContext.Airplanes.Find(2L),
-                    Pilot = dbContext.Persons.Find(3L),
+                    Pilot = dbContext.Persons.Find(103L),
                     Copilot = null,
                     Task = "Tahac",
                     Type = FlightType.Towplane
@@ -97,7 +97,7 @@ namespace FlightLogNet
                     TakeoffTime = now.AddMinutes(-100),
                     LandingTime = null,
                     Airplane = dbContext.Airplanes.Find(1L),
-                    Pilot = dbContext.Persons.Find(5L),
+                    Pilot = dbContext.Persons.Find(105L),
                     Copilot = null,
                     Task = "VLEK",
                     Type = FlightType.Glider
@@ -108,7 +108,7 @@ namespace FlightLogNet
                     TakeoffTime = now.AddMinutes(-100),
                     LandingTime = null,
                     Airplane = dbContext.Airplanes.Find(2L),
-                    Pilot = dbContext.Persons.Find(3L),
+                    Pilot = dbContext.Persons.Find(103L),
                     Copilot = null,
                     Task = "Tahac",
                     Type = FlightType.Towplane
@@ -119,7 +119,7 @@ namespace FlightLogNet
                     TakeoffTime = new DateTime(2020, 1, 7, 16, 47, 10),
                     LandingTime = new DateTime(2020, 1, 7, 17, 17, 10),
                     Airplane = dbContext.Airplanes.Find(2L),
-                    Pilot = dbContext.Persons.Find(12L),
+                    Pilot = dbContext.Persons.Find(112L),
                     Copilot = null,
                     Task = "Tahac",
                     Type = FlightType.Towplane
