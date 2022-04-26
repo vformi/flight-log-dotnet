@@ -1,32 +1,35 @@
-﻿using System.Diagnostics;
-
-using FlightLogNet.Models;
-
-namespace FlightLogNet
+﻿namespace FlightLogNet
 {
-    using System;
 
+
+
+    using System;
+    using System.Diagnostics;
+
+    using FlightLogNet.Models;
     using FlightLogNet.Repositories;
     using FlightLogNet.Repositories.Entities;
 
+    using Microsoft.Extensions.Configuration;
+
     internal static class TestDatabaseGenerator
     {
-        internal static void RenewDatabase()
+        internal static void RenewDatabase(IConfiguration configuration)
         {
-            DeleteOldDatabase();
-            CreateTestDatabaseWithFixedTime(DateTime.Now);
+            DeleteOldDatabase(configuration);
+            CreateTestDatabaseWithFixedTime(DateTime.Now, configuration);
         }
 
-        public static void DeleteOldDatabase()
+        public static void DeleteOldDatabase(IConfiguration configuration)
         {
-            using var dbContext = new LocalDatabaseContext();
+            using var dbContext = new LocalDatabaseContext(configuration);
             dbContext.Database.EnsureDeleted();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "StringLiteralTypo", Justification = "This is test data.")]
-        public static void CreateTestDatabaseWithFixedTime(DateTime now)
+        public static void CreateTestDatabaseWithFixedTime(DateTime now, IConfiguration configuration)
         {
-            using var dbContext = new LocalDatabaseContext();
+            using var dbContext = new LocalDatabaseContext(configuration);
             bool newCreated = dbContext.Database.EnsureCreated();
 
             if (!newCreated)
@@ -34,6 +37,8 @@ namespace FlightLogNet
                 Debug.WriteLine(@"Error: Database not created!");
                 return;
             }
+
+            InitializeDatabase(configuration);
 
             dbContext.Persons.AddRange(
                 new Person { FirstName = "Kamila", LastName = "Spoustová", Address = null },
@@ -50,23 +55,9 @@ namespace FlightLogNet
                     Address = new Address { City = null, Country = null, PostalCode = null, Street = null }
                 });
 
-            dbContext.ClubAirplanes.AddRange(
-                new ClubAirplane
-                {
-                    Id = 2,
-                    Immatriculation = "OK-B123",
-                    AirplaneType = new AirplaneType { Type = "L-13A Blaník" }
-                },
-                new ClubAirplane
-                {
-                    Id = 1,
-                    Immatriculation = "OK-V23424",
-                    AirplaneType = new AirplaneType { Type = "Zlín Z-42M" }
-                });
-
             dbContext.Airplanes.AddRange(
-                new Airplane { Id = 2, GuestAirplaneImmatriculation = "OK-B123", GuestAirplaneType = "L-13A Blaník" },
-                new Airplane { Id = 1, GuestAirplaneImmatriculation = "OK-V23424", GuestAirplaneType = "Zlín Z-42M" });
+                new Airplane { Id = 2, GuestAirplaneImmatriculation = "OK-B128", GuestAirplaneType = "L-13A Blaník" },
+                new Airplane { Id = 1, GuestAirplaneImmatriculation = "OK-V23428", GuestAirplaneType = "Zlín Z-42M" });
 
             dbContext.Flights.AddRange(
                 new Flight
@@ -139,6 +130,27 @@ namespace FlightLogNet
                 new FlightStart
                 {
                     Towplane = dbContext.Flights.Find(444L)
+                });
+
+            dbContext.SaveChanges();
+        }
+
+        public static void InitializeDatabase(IConfiguration configuration)
+        {
+            using var dbContext = new LocalDatabaseContext(configuration);
+
+            dbContext.ClubAirplanes.AddRange(
+                new ClubAirplane
+                {
+                    Id = 2,
+                    Immatriculation = "OK-B123",
+                    AirplaneType = new AirplaneType { Type = "L-13A Blaník" }
+                },
+                new ClubAirplane
+                {
+                    Id = 1,
+                    Immatriculation = "OK-V23424",
+                    AirplaneType = new AirplaneType { Type = "Zlín Z-42M" }
                 });
 
             dbContext.SaveChanges();

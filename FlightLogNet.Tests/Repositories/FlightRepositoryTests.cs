@@ -11,23 +11,27 @@ namespace FlightLogNet.Tests.Repositories
 
     using Xunit;
 
+    using Microsoft.Extensions.Configuration;
+
     public class FlightRepositoryTests
     {
         private readonly IMapper mapper;
+        private readonly IConfiguration configuration;
 
-        public FlightRepositoryTests(IMapper mapper)
+        public FlightRepositoryTests(IMapper mapper, IConfiguration configuration)
         {
             this.mapper = mapper;
+            this.configuration = configuration;
         }
 
         private IFlightRepository CreateFlightRepository()
         {
-            return new FlightRepository(mapper);
+            return new FlightRepository(mapper, this.configuration);
         }
 
-        private static void RenewDatabase()
+        private void RenewDatabase()
         {
-            TestDatabaseGenerator.RenewDatabase();
+            TestDatabaseGenerator.RenewDatabase(this.configuration);
         }
 
         [Fact(Skip = "Not correctly implemented.")]

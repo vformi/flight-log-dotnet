@@ -1,0 +1,31 @@
+<template>
+  <div class="row">
+    <div class="col text-center">
+      <h4>${title}</h4>
+    </div>
+  </div>
+
+  <compose view-model="./airplaneInput"
+           view="./airplaneInput.html"
+           model.bind="{ airplane : flight.airplane, allowNone: allowNone }"></compose>
+  <div show.bind="flight.airplane.type.value != 'none'">
+    <compose view-model="./personInput"
+             view="./personInput.html"
+             model.bind="{ person : flight.pilot }"></compose>
+
+    <hr>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <select value.bind="flight.copilot" class="form-control">
+          <option model.bind="null">Bez kopilota</option>
+          <option repeat.for="clubMember of clubMembers" model.bind="clubMember">
+            ${clubMember.lastName}, ${clubMember.firstName}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <input type="text" value.bind="flight.note" class="form-control" placeholder="Poznámka">
+      </div>
+    </div>
+  </div>
+</template>

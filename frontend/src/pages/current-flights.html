@@ -1,0 +1,62 @@
+<template>
+  <require from="../resources/value-converters/time-format"></require>
+  <require from="../resources/value-converters/date-time-format"></require>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <div class="mb-4">
+          <div class="card m-auto" show.two-way="flightToLandWithTime" style="max-width: 20rem">
+            <div class="card-header">
+              Vyberte čas přistání pro ${flightToLandWithTime.airplane.immatriculation}
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <input type="datetime-local" value.bind="landingTime | dateTimeFormat" class="form-control">
+              </div>
+              <div class="form-group text-center">
+                <input type="button" class="btn btn-sm btn-primary" click.trigger="landAtSelectedTime()" value="Přistát">
+                <input type="button" class="btn btn-sm btn-secondary" click.trigger="cancelLandingWithTime()" value="Zrušit">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Vzlet</th>
+            <th>Imatrikulace</th>
+            <th class="d-none d-sm-table-cell">Typ</th>
+            <th class="d-none d-sm-table-cell">Pilot</th>
+            <th class="d-none d-sm-table-cell">Úloha</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr repeat.for="flight of flightsInAir">
+            <td>${flight.takeoffTime | timeFormat}</td>
+            <td>${flight.airplane.immatriculation}</td>
+            <td class="d-none d-sm-table-cell">${flight.airplane.type}</td>
+            <td class="d-none d-sm-table-cell">${flight.pilot.lastName}, ${flight.pilot.firstName}</td>
+            <td class="d-none d-sm-table-cell">${flight.task}</td>
+            <td>
+              <a href="#" click.trigger="openLandingWithTime(flight)" title="Vybrat čas přistání">
+                <i class="far fa-clock"></i>
+              </a>
+              &nbsp;
+              <a href="#" click.trigger="landNow(flight)" title="Přistát">
+                <i class="fas fa-plane-arrival"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</template>

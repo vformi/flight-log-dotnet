@@ -1,0 +1,68 @@
+{
+  "name": "flightlog-gui",
+  "type": "project:application",
+  "bundler": {
+    "id": "webpack",
+    "displayName": "Webpack"
+  },
+  "build": {
+    "options": {
+      "server": "dev",
+      "extractCss": "prod",
+      "coverage": false
+    }
+  },
+  "platform": {
+    "id": "web",
+    "displayName": "Web",
+    "hmr": false,
+    "open": false,
+    "port": 8080,
+    "output": "dist"
+  },
+  "loader": {
+    "id": "none",
+    "displayName": "None"
+  },
+  "transpiler": {
+    "id": "babel",
+    "displayName": "Babel",
+    "fileExtension": ".js"
+  },
+  "markupProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".html"
+  },
+  "cssProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".css"
+  },
+  "editor": {
+    "id": "webstorm",
+    "displayName": "WebStorm"
+  },
+  "unitTestRunners": [
+    {
+      "id": "none",
+      "displayName": "None"
+    }
+  ],
+  "integrationTestRunner": {
+    "id": "none",
+    "displayName": "None"
+  },
+  "paths": {
+    "root": "src",
+    "resources": "resources",
+    "elements": "resources/elements",
+    "attributes": "resources/attributes",
+    "valueConverters": "resources/value-converters",
+    "bindingBehaviors": "resources/binding-behaviors"
+  },
+  "packageManager": "npm",
+  "copyFiles": {
+    "node_modules/@fortawesome/fontawesome-free/webfonts/*": "@fortawesome/fontawesome-free/webfonts"
+  }
+}

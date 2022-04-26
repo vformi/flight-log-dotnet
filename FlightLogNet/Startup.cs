@@ -11,6 +11,8 @@ namespace FlightLogNet
 
     public class Startup
     {
+        private const string AllowedOrigins = "AllowedOrigins";
+
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -25,6 +27,21 @@ namespace FlightLogNet
             services.AddControllers();
             services.AddAutoMapper(typeof(AutoMapperProfile));
             // services.AddAutoMapper(System.Reflection.Assembly.GetCallingAssembly());
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policy => {
+                        string[] origins = this.Configuration.GetSection(AllowedOrigins).Get<string[]>();
+                        if (origins is null)
+                        {
+                            policy.AllowAnyOrigin();
+                        }
+                        else
+                        {
+                            policy.WithOrigins(origins);
+                        }
+                    });
+            });
         }
 
         // ReSharper disable once UnusedMember.Global - used by Framework
@@ -34,21 +51,25 @@ namespace FlightLogNet
             loggerFactory.AddLog4Net();
 
             app.UseDefaultFiles();
-            app.UseStaticFiles();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                TestDatabaseGenerator.RenewDatabase();
+                TestDatabaseGenerator.RenewDatabase(this.Configuration);
             }
             else
             {
-                using var dbContext = new Repositories.LocalDatabaseContext();
-                dbContext.Database.EnsureCreated();
+                using var dbContext = new Repositories.LocalDatabaseContext(this.Configuration);
+                bool newlyCreated = dbContext.Database.EnsureCreated();
+                if (newlyCreated)
+                {
+                    TestDatabaseGenerator.InitializeDatabase(this.Configuration);
+                }
             }
             
             app.UseRouting();
-
+            app.UseCors();
+            app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {

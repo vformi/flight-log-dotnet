@@ -1,0 +1,56 @@
+<template>
+  <require from="../resources/value-converters/time-format"></require>
+  <require from="../resources/value-converters/date-format"></require>
+
+
+
+  <div class="container-fluid">
+    <div class="text-right">
+      <a href="${reportUrl}" class="btn btn-primary m-3" target="_blank">Stáhnout lety v CSV</a>
+    </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Typ</th>
+      <th>Imatrikulace</th>
+      <th>Osádka</th>
+      <th>Úkol</th>
+      <th>Start</th>
+      <th>Přistání</th>
+      <th>Doba letu</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <template repeat.for="flight of flightReport" containerless>
+      <tr class="table-secondary">
+        <td>${flight.towplane.takeoffTime | dateFormat}</td>
+        <td>${flight.towplane.airplane.type}</td>
+        <td>${flight.towplane.airplane.immatriculation}</td>
+        <td><span class="pilot">${flight.towplane.pilot.lastName}</span><span class="copilot" if.bind="flight.towplane.copilot">, ${flight.towplane.copilot.lastName}</span></td>
+        <td>${flight.towplane.task}</td>
+        <td>${flight.towplane.takeoffTime | timeFormat}</td>
+        <td>${flight.towplane.landingTime | timeFormat}</td>
+        <td>${getFormattedFlightDuration(flight.towplane)}</td>
+
+      </tr>
+      <tr if.bind="flight.glider">
+        <td></td>
+        <td>${flight.glider.airplane.type}</td>
+        <td>${flight.glider.airplane.immatriculation}</td>
+        <td><span class="pilot">${flight.glider.pilot.lastName}</span><span class="copilot" if.bind="flight.glider.copilot">, ${flight.glider.copilot.lastName}</span></td>
+        <td>${flight.glider.task}</td>
+        <td>${flight.glider.takeoffTime | timeFormat}</td>
+        <td>${flight.glider.landingTime | timeFormat}</td>
+        <td>${getFormattedFlightDuration(flight.glider)}</td>
+
+      </tr>
+    </template>
+    </tbody>
+  </table>
+
+  </div>
+
+</template>

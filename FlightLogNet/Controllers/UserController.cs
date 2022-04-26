@@ -5,10 +5,12 @@
     using FlightLogNet.Facades;
     using FlightLogNet.Models;
 
+    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
     [ApiController]
+    [EnableCors]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {

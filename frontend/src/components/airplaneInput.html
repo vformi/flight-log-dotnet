@@ -1,0 +1,33 @@
+<template>
+  <div class="row">
+    <div class="form-group col">
+      <div class="btn-group btn-group-toggle">
+        <label repeat.for="airplaneType of airplane.types" class="btn ${airplaneType.value == airplane.type.value ? 'btn-primary' : 'btn-outline-primary'}">
+          <input type="radio" name="isClubSwitcher" value.bind="airplaneType.value" checked.bind="airplane.type.value"> ${airplaneType.label}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" if.bind="airplane.type.value == 'club'">
+    <div class="form-group col-sm-6">
+      <label for="clubAirplaneImmatriculation">Letadlo klubu</label>
+      <select value.bind="airplane.clubAirplane" class="form-control" id="clubAirplaneImmatriculation" placeholder="Vyber klubové letadlo">
+        <option repeat.for="airplane of airplanes" model.bind="airplane">
+          ${airplane.immatriculation} (${airplane.type})
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row" if.bind="airplane.type.value == 'guest'">
+    <div class="form-group col-sm-6">
+      <label for="guestAirplaneImmatriculation">Imatrikulace</label>
+      <input type="text" value.bind="airplane.guestAirplane.immatriculation" class="form-control" id="guestAirplaneImmatriculation" placeholder="Zadej imatrikulaci"/>
+    </div>
+    <div class=" form-group col-sm-6">
+      <label for="guestAirplaneType">Typ</label>
+      <input type="text" value.bind="airplane.guestAirplane.type" class="form-control" id="guestAirplaneType" placeholder="Typ">
+    </div>
+  </div>
+</template>

@@ -354,3 +354,14 @@ MigrationBackup/
 
 /FlightLogNet/local.db
 /FlightLogNet/app.log.*
+
+# Dependencies
+frontend/node_modules
+
+# Compiled files
+frontend/scripts
+frontend/src/environment.js
+frontend/src/environment.ts
+frontend/dist
+
+.idea

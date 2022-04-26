@@ -1,0 +1,30 @@
+<template>
+  <div class="container">
+    <form>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="takeoffTime">Čas vzletu</label>
+          <input type="datetime-local" class="form-control" value.bind="takeoffForm.takeoffTime" id="takeoffTime" placeholder="Current time">
+        </div>
+        <div class="form-group col-sm-6">
+          <label for="task">Úloha</label>
+          <input type="text" class="form-control" value.bind="takeoffForm.task" id="task" placeholder="Úloha">
+        </div>
+      </div>
+
+      <compose view-model="../components/flightInput"
+               view="../components/flightInput.html"
+               model.bind="{ flight: takeoffForm.towplane, title: 'Vlečná' }"></compose>
+
+      <compose view-model="../components/flightInput"
+               view="../components/flightInput.html"
+               model.bind="{ flight: takeoffForm.glider, title: 'Kluzák', allowNone: true }"></compose>
+
+      <div class="row">
+        <div class="col form-group text-center">
+          <button click.trigger="takeoff()" type="button" class="btn btn-primary btn-lg btn-block">Start</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

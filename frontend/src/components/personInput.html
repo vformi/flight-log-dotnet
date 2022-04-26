@@ -1,0 +1,53 @@
+<template>
+  <div class="row">
+    <div class="col text-center">
+      <h5>Pilot</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col">
+      <div class="btn-group btn-group-toggle">
+        <label class="btn ${person.isClub ? 'btn-primary' : 'btn-outline-primary'}">
+          <input type="radio" name="isClubSwithcer" model.bind="true" checked.bind="person.isClub"> Člen klubu
+        </label>
+        <label class="btn ${!person.isClub ? 'btn-primary' : 'btn-outline-primary'}">
+          <input type="radio" name="isClubSwithcer" model.bind="false" checked.bind="person.isClub"> Host
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" if.bind="person.isClub">
+    <div class="form-group col-sm-6">
+      <select value.bind="person.clubMember" class="form-control" placeholder="Vyberte člena klubu">
+        <option repeat.for="clubMember of clubMembers" model.bind="clubMember">
+          ${clubMember.lastName}, ${clubMember.firstName}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row" else>
+    <div class="form-group col-sm-3">
+      <input type="text" value.bind="person.guest.firstName" class="form-control" placeholder="Jméno"/>
+    </div>
+    <div class=" form-group col-sm-3">
+      <input type="text" value.bind="person.guest.lastName" class="form-control" placeholder="Příjmení">
+    </div>
+    <div class=" form-group col-sm-5">
+      <input type="text" value.bind="person.guest.address.street" class="form-control" placeholder="Ulice">
+    </div>
+    <div class=" form-group col-sm-3">
+      <input type="text" value.bind="person.guest.address.city" class="form-control" placeholder="Město">
+    </div>
+    <div class=" form-group col-sm-2">
+      <input type="text" value.bind="person.guest.address.postalCode" class="form-control" placeholder="PSČ">
+    </div>
+    <div class=" form-group col-sm-3">
+      <input type="text" value.bind="person.guest.address.country" class="form-control" placeholder="Země">
+    </div>
+
+  </div>
+</template>

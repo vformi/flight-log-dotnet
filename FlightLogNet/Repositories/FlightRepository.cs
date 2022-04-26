@@ -10,20 +10,23 @@
     using FlightLogNet.Repositories.Interfaces;
 
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     public class FlightRepository : IFlightRepository
     {
         private readonly IMapper mapper;
+        private readonly IConfiguration configuration;
 
-        public FlightRepository(IMapper mapper)
+        public FlightRepository(IMapper mapper, IConfiguration configuration)
         {
             this.mapper = mapper;
+            this.configuration = configuration;
         }
 
         // TODO 2.1: Upravte metodu tak, aby vrátila pouze lety specifického typu
         public IList<FlightModel> GetAllFlights()
         {
-            using var dbContext = new LocalDatabaseContext();
+            using var dbContext = new LocalDatabaseContext(this.configuration);
 
             var flights = dbContext.Flights;
 
@@ -35,7 +38,7 @@
 
         public void LandFlight(FlightLandingModel landingModel)
         {
-            using var dbContext = new LocalDatabaseContext();
+            using var dbContext = new LocalDatabaseContext(this.configuration);
 
             var flight = dbContext.Flights.Find(landingModel.FlightId);
             flight.LandingTime = landingModel.LandingTime;
@@ -44,7 +47,7 @@
 
         public void TakeoffFlight(long? gliderFlightId, long? towplaneFlightId)
         {
-            using var dbContext = new LocalDatabaseContext();
+            using var dbContext = new LocalDatabaseContext(this.configuration);
 
             var flightStart = new FlightStart
             {
@@ -58,7 +61,7 @@
 
         public long CreateFlight(CreateFlightModel model)
         {
-            using var dbContext = new LocalDatabaseContext();
+            using var dbContext = new LocalDatabaseContext(this.configuration);
 
             var copilot = model.CopilotId != null
                 ? dbContext.Persons.Find(model.CopilotId)
@@ -81,7 +84,7 @@
 
         public IList<ReportModel> GetReport()
         {
-            using var dbContext = new LocalDatabaseContext();
+            using var dbContext = new LocalDatabaseContext(this.configuration);
 
             var flightStarts = dbContext.FlightStarts
                 .Include(flight => flight.Glider)
