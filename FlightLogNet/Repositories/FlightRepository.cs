@@ -1,5 +1,6 @@
 ﻿namespace FlightLogNet.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -40,7 +41,8 @@
         {
             using var dbContext = new LocalDatabaseContext(this.configuration);
 
-            var flight = dbContext.Flights.Find(landingModel.FlightId);
+            var flight = dbContext.Flights.Find(landingModel.FlightId) 
+                         ?? throw new NotSupportedException($"Unable to land not-registered flight: {landingModel}.");
             flight.LandingTime = landingModel.LandingTime;
             dbContext.SaveChanges();
         }

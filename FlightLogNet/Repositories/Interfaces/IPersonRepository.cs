@@ -6,8 +6,8 @@
     {
         long AddGuestPerson(PersonModel person);
 
-        bool TryGetPerson(PersonModel airplaneModel, out long airplaneId);
+        bool TryGetPerson(PersonModel personModel, out long personId);
 
-        long CreateClubMember(PersonModel person);
+        long CreateClubMember(PersonModel pilot);
     }
 }

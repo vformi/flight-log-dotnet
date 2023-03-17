@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/FlightLogNet/bin/Debug/net6.0/FlightLogNet.dll",
+            "program": "${workspaceFolder}/FlightLogNet/bin/Debug/net7.0/FlightLogNet.dll",
             "args": [],
             "cwd": "${workspaceFolder}/FlightLogNet",
             "stopAtEntry": false,

@@ -8,8 +8,10 @@
 
 #use soft tabs (spaces) for indentation
 indent_style = space
+indent_size = 4
 
 #Formatting - new line options
+insert_final_newline = true
 
 #place catch statements on a new line
 csharp_new_line_before_catch = true
@@ -76,11 +78,11 @@ dotnet_style_object_initializer = true:suggestion
 #Style - implicit and explicit types
 
 #prefer var over explicit type in all cases, unless overridden by another code style rule
-csharp_style_var_elsewhere = true:suggestion
+csharp_style_var_elsewhere = true:silent
 #prefer var is used to declare variables with built-in system types such as int
-csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_for_built_in_types = false:silent
 #prefer var when the type is already mentioned on the right-hand side of a declaration expression
-csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_when_type_is_apparent = true:silent
 
 #Style - language keyword and framework type options
 
@@ -112,4 +114,4 @@ dotnet_style_qualification_for_method = true:suggestion
 dotnet_style_qualification_for_property = true:suggestion
 
 # IDE0065: Misplaced using directive
-dotnet_diagnostic.IDE0065.severity = none
+dotnet_diagnostic.IDE0065.severity = silent

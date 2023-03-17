@@ -1,8 +1,5 @@
 ﻿namespace FlightLogNet
 {
-
-
-
     using System;
     using System.Diagnostics;
 
