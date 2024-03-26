@@ -5,15 +5,13 @@
 
     using AutoMapper;
 
-    using FlightLogNet.Models;
+    using Models;
 
     using Microsoft.Extensions.Configuration;
 
-    using RestSharp;
-
-    public class ClubUserDatabase : IClubUserDatabase
+    public class ClubUserDatabase(IConfiguration configuration, IMapper mapper) : IClubUserDatabase
     {
-        // TODO 8.1: Přidejte si přes dependency injection configuraci 
+        // TODO 8.1: Přidejte si přes dependency injection configuraci
 
         public bool TryGetClubUser(long memberId, out PersonModel personModel)
         {
@@ -28,14 +26,14 @@
             return this.TransformToPersonModel(x);
         }
 
-        private IList<ClubUser> ReceiveClubUsers()
+        private List<ClubUser> ReceiveClubUsers()
         {
             // TODO 8.2: Naimplementujte volání endpointu ClubDB pomocí RestSharp
 
             return null;
         }
 
-        private IList<PersonModel> TransformToPersonModel(IList<ClubUser> users)
+        private List<PersonModel> TransformToPersonModel(IList<ClubUser> users)
         {
             return null;
         }

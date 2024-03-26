@@ -2,21 +2,14 @@
 {
     using System.Collections.Generic;
 
-    using FlightLogNet.Models;
-    using FlightLogNet.Repositories.Interfaces;
+    using Models;
+    using Repositories.Interfaces;
 
-    public class AirplaneFacade
+    public class AirplaneFacade(IAirplaneRepository airplaneRepository)
     {
-        private readonly IAirplaneRepository airplaneRepository;
-
-        public AirplaneFacade(IAirplaneRepository airplaneRepository)
-        {
-            this.airplaneRepository = airplaneRepository;
-        }
-
         public IEnumerable<AirplaneModel> GetClubAirplanes()
         {
-            return this.airplaneRepository.GetClubAirplanes();
+            return airplaneRepository.GetClubAirplanes();
         }
     }
 }

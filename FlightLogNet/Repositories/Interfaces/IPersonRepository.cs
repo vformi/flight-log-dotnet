@@ -1,6 +1,6 @@
 ﻿namespace FlightLogNet.Repositories.Interfaces
 {
-    using FlightLogNet.Models;
+    using Models;
 
     public interface IPersonRepository
     {

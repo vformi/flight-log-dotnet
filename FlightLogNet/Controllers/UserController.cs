@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
-    using FlightLogNet.Facades;
-    using FlightLogNet.Models;
+    using Facades;
+    using Models;
 
     using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
@@ -12,22 +12,14 @@
     [ApiController]
     [EnableCors]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UserController(ILogger<UserController> logger, PersonFacade personFacade) 
+        : ControllerBase
     {
-        private readonly ILogger<UserController> logger;
-        private readonly PersonFacade personFacade;
-
-        public UserController(ILogger<UserController> logger, PersonFacade personFacade)
-        {
-            this.logger = logger;
-            this.personFacade = personFacade;
-        }
-
         [HttpGet]
         public IEnumerable<PersonModel> Get()
         {
-            this.logger.LogDebug("Get club members.");
-            return this.personFacade.GetClubMembers();
+            logger.LogDebug("Get club members.");
+            return personFacade.GetClubMembers();
         }
     }
 }

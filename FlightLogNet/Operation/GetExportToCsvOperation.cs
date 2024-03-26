@@ -1,20 +1,9 @@
 ﻿namespace FlightLogNet.Operation
 {
-    using System.Collections.Generic;
-    using System.Globalization;
+    using Repositories.Interfaces;
 
-    using FlightLogNet.Models;
-    using FlightLogNet.Repositories.Interfaces;
-
-    public class GetExportToCsvOperation
+    public class GetExportToCsvOperation(IFlightRepository flightRepository)
     {
-        private readonly IFlightRepository flightRepository;
-
-        public GetExportToCsvOperation(IFlightRepository flightRepository)
-        {
-            this.flightRepository = flightRepository;
-        }
-
         public byte[] Execute()
         {
             // TODO 5.1: Naimplementujte export do CSV

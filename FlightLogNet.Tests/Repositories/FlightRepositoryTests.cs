@@ -13,33 +13,24 @@ namespace FlightLogNet.Tests.Repositories
 
     using Microsoft.Extensions.Configuration;
 
-    public class FlightRepositoryTests
+    public class FlightRepositoryTests(IMapper mapper, IConfiguration configuration)
     {
-        private readonly IMapper mapper;
-        private readonly IConfiguration configuration;
-
-        public FlightRepositoryTests(IMapper mapper, IConfiguration configuration)
-        {
-            this.mapper = mapper;
-            this.configuration = configuration;
-        }
-
         private IFlightRepository CreateFlightRepository()
         {
-            return new FlightRepository(mapper, this.configuration);
+            return new FlightRepository(mapper, configuration);
         }
 
         private void RenewDatabase()
         {
-            TestDatabaseGenerator.RenewDatabase(this.configuration);
+            TestDatabaseGenerator.RenewDatabase(configuration);
         }
 
         [Fact(Skip = "Not correctly implemented.")]
         public void GetFlightsOfTypeGlider_Return2Gliders()
         {
             // Arrange
-            RenewDatabase();
-            var flightRepository = CreateFlightRepository();
+            this.RenewDatabase();
+            var flightRepository = this.CreateFlightRepository();
 
             // Act
             // TODO 2.2: Upravte volanou metodu, aby výsledek vrátil pouze lety, které jsou kluzáky.
@@ -53,8 +44,8 @@ namespace FlightLogNet.Tests.Repositories
         public void GetAirplanesInAir_ReturnFlightModels()
         {
             // Arrange
-            RenewDatabase();
-            var flightRepository = CreateFlightRepository();
+            this.RenewDatabase();
+            var flightRepository = this.CreateFlightRepository();
 
             // Act
             // TODO 2.4: Doplòte metodu repozitáøe a odstraòte pøeskoèení testu (skip)
@@ -68,8 +59,8 @@ namespace FlightLogNet.Tests.Repositories
         public void GetReport_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            RenewDatabase();
-            var flightRepository = CreateFlightRepository();
+            this.RenewDatabase();
+            var flightRepository = this.CreateFlightRepository();
 
             // Act
             var result = flightRepository.GetReport();

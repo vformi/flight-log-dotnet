@@ -1,19 +1,12 @@
 ﻿namespace FlightLogNet.Repositories
 {
-    using FlightLogNet.Repositories.Entities;
+    using Entities;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
 
-    public class LocalDatabaseContext : DbContext
+    public class LocalDatabaseContext(IConfiguration configuration) : DbContext
     {
-        private readonly IConfiguration configuration;
-
-        public LocalDatabaseContext(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
-
         public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Airplane> Airplanes { get; set; }
@@ -26,22 +19,22 @@
 
         public DbSet<Person> Persons { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string sqliteConnectionString = this.configuration.GetValue<string>("SqliteConnectionString");
-            string npgsqlConnectionString = this.configuration.GetValue<string>("NpgsqlConnectionString");
+            string sqliteConnectionString = configuration.GetValue<string>("SqliteConnectionString");
+            string npgsqlConnectionString = configuration.GetValue<string>("NpgsqlConnectionString");
 
             if (sqliteConnectionString is not null)
             {
-                options.UseSqlite(sqliteConnectionString);
+                optionsBuilder.UseSqlite(sqliteConnectionString);
             }
             else if (npgsqlConnectionString is not null)
             {
-                options.UseNpgsql(npgsqlConnectionString);
+                optionsBuilder.UseNpgsql(npgsqlConnectionString);
             }
             else
             {
-                options.UseSqlite("Data Source=local.db");
+                optionsBuilder.UseSqlite("Data Source=local.db");
             }
         }
     }

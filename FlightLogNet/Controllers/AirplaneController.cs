@@ -1,16 +1,13 @@
 ﻿namespace FlightLogNet.Controllers
 {
-    using System.Collections.Generic;
-
-    using FlightLogNet.Facades;
-    using FlightLogNet.Models;
-
+    using Facades;
     using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
     [EnableCors]
-    public class AirplaneController : ControllerBase
+    public class AirplaneController(ILogger<AirplaneController> logger, AirplaneFacade airplaneFacade)
+        : ControllerBase
     {
         // TODO 3.1: Vystavte REST HTTPGet metodu vracející seznam klubových letadel
         // Letadla získáte voláním airplaneFacade

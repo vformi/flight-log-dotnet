@@ -2,7 +2,7 @@
 {
     using System;
 
-    using FlightLogNet.Models;
+    using Models;
 
     public class Flight
     {

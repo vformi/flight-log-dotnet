@@ -5,9 +5,9 @@
 
     using AutoMapper;
 
-    using FlightLogNet.Integration;
-    using FlightLogNet.Models;
-    using FlightLogNet.Repositories.Entities;
+    using Integration;
+    using Models;
+    using Repositories.Entities;
 
     public class AutoMapperProfile : Profile
     {

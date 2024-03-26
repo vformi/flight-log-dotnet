@@ -1,14 +1,14 @@
 ﻿namespace FlightLogNet
 {
-    using FlightLogNet.Facades;
-    using FlightLogNet.Integration;
-    using FlightLogNet.Operation;
-    using FlightLogNet.Repositories;
-    using FlightLogNet.Repositories.Interfaces;
+    using Facades;
+    using Integration;
+    using Operation;
+    using Repositories;
+    using Repositories.Interfaces;
 
     using Microsoft.Extensions.DependencyInjection;
 
-    internal class InjectConfiguration
+    internal static class InjectConfiguration
     {
         internal static void Initialization(IServiceCollection services)
         {

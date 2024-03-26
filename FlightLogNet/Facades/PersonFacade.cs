@@ -2,21 +2,14 @@
 {
     using System.Collections.Generic;
 
-    using FlightLogNet.Integration;
-    using FlightLogNet.Models;
+    using Integration;
+    using Models;
 
-    public class PersonFacade
+    public class PersonFacade(IClubUserDatabase clubUserDatabase)
     {
-        private readonly IClubUserDatabase clubUserDatabase;
-
-        public PersonFacade(IClubUserDatabase clubUserDatabase)
-        {
-            this.clubUserDatabase = clubUserDatabase;
-        }
-
         internal IList<PersonModel> GetClubMembers()
         {
-            return this.clubUserDatabase.GetClubUsers();
+            return clubUserDatabase.GetClubUsers();
         }
     }
 }

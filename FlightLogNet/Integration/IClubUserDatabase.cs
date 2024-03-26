@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using FlightLogNet.Models;
+    using Models;
 
     public interface IClubUserDatabase
     {

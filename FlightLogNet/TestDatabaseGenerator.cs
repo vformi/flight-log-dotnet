@@ -3,10 +3,10 @@
     using System;
     using System.Diagnostics;
 
-    using FlightLogNet.Models;
-    using FlightLogNet.Repositories;
-    using FlightLogNet.Repositories.Entities;
-
+    using Models;
+    using Repositories;
+    using Repositories.Entities;
+    
     using Microsoft.Extensions.Configuration;
 
     internal static class TestDatabaseGenerator

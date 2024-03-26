@@ -2,9 +2,9 @@
 {
     using Microsoft.Extensions.DependencyInjection;
     
-    public class Startup
+    public static class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             InjectConfiguration.Initialization(services);
             services.AddAutoMapper(typeof(AutoMapperProfile));

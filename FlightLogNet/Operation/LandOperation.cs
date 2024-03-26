@@ -2,23 +2,16 @@
 {
     using System;
 
-    using FlightLogNet.Models;
-    using FlightLogNet.Repositories.Interfaces;
+    using Models;
+    using Repositories.Interfaces;
 
-    public class LandOperation
+    public class LandOperation(IFlightRepository flightRepository)
     {
-        private readonly IFlightRepository flightRepository;
-
-        public LandOperation(IFlightRepository flightRepository)
-        {
-            this.flightRepository = flightRepository;
-        }
-
         public void Execute(FlightLandingModel landingModel)
         {
             landingModel.LandingTime = GetLocalTimeByZuluTime(landingModel.LandingTime);
 
-            this.flightRepository.LandFlight(landingModel);
+            flightRepository.LandFlight(landingModel);
         }
 
         private static DateTime GetLocalTimeByZuluTime(DateTime landingTime)

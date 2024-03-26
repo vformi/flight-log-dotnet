@@ -3,24 +3,15 @@
     using System;
     using System.Collections.Generic;
 
-    using FlightLogNet.Models;
-    using FlightLogNet.Repositories.Interfaces;
+    using Models;
+    using Repositories.Interfaces;
 
-    public class TakeoffOperation
+    public class TakeoffOperation(
+        IFlightRepository flightRepository,
+        IAirplaneRepository airplaneRepository,
+        CreatePersonOperation createPersonOperation)
     {
         private const int GuestId = 0;
-        private readonly IFlightRepository flightRepository;
-        private readonly IAirplaneRepository airplaneRepository;
-        private readonly CreatePersonOperation createPersonOperation;
-
-        public TakeoffOperation(IFlightRepository flightRepository,
-            IAirplaneRepository airplaneRepository,
-            CreatePersonOperation createPersonOperation)
-        {
-            this.flightRepository = flightRepository;
-            this.airplaneRepository = airplaneRepository;
-            this.createPersonOperation = createPersonOperation;
-        }
 
         public void Execute(FlightTakeOffModel takeOffModel)
         {
@@ -34,10 +25,10 @@
             long? towplaneFlightId = this.CreateFlight(takeOffModel.Towplane, takeOffModel.TakeoffTime, takeOffModel.Task, FlightType.Towplane);
             long? gliderFlightId = this.CreateFlight(takeOffModel.Glider, takeOffModel.TakeoffTime, takeOffModel.Task, FlightType.Glider);
 
-            this.flightRepository.TakeoffFlight(gliderFlightId, towplaneFlightId);
+            flightRepository.TakeoffFlight(gliderFlightId, towplaneFlightId);
         }
 
-        private long? CreateFlight(AirplaneWithCrewModel airplaneWithCrewModel, System.DateTime takeoffTime, string task, FlightType type)
+        private long? CreateFlight(AirplaneWithCrewModel airplaneWithCrewModel, DateTime takeoffTime, string task, FlightType type)
         {
             if (airplaneWithCrewModel is null)
             {
@@ -54,23 +45,23 @@
                 Task = task
             };
 
-            long towplaneFlightId = this.flightRepository.CreateFlight(model);
+            long towplaneFlightId = flightRepository.CreateFlight(model);
             return towplaneFlightId;
         }
 
         private long? CreatePerson(PersonModel personModel)
         {
-            return this.createPersonOperation.Execute(personModel);
+            return createPersonOperation.Execute(personModel);
         }
 
         private long CreateAirplane(AirplaneModel airplaneModel)
         {
             if (airplaneModel?.Id == GuestId)
             {
-                return this.airplaneRepository.AddGuestAirplane(airplaneModel);
+                return airplaneRepository.AddGuestAirplane(airplaneModel);
             }
 
-            if (this.airplaneRepository.TryGetAirplane(airplaneModel, out long airplaneId))
+            if (airplaneRepository.TryGetAirplane(airplaneModel, out long airplaneId))
             {
                 return airplaneId;
             }
