@@ -49,7 +49,15 @@ namespace FlightLogNet.Operation
             builder.Append($"{flight.Airplane.Type}{Separator}");
             builder.Append($"{flight.Airplane.Immatriculation}{Separator}");
             builder.Append($"{flight.Pilot.LastName}, {flight.Pilot.FirstName}{Separator}");
-            builder.Append($"{flight.Copilot?.LastName ?? string.Empty}{Separator}");
+            if (!string.IsNullOrEmpty(flight.Copilot?.LastName) && !string.IsNullOrEmpty(flight.Copilot?.FirstName))
+            {
+                builder.Append($"{flight.Copilot.LastName}, {flight.Copilot.FirstName}");
+            }
+            else
+            {
+                builder.Append($"{flight.Copilot?.LastName ?? string.Empty}{flight.Copilot?.FirstName ?? string.Empty}");
+            }
+            builder.Append(Separator);
             builder.Append($"{flight.Task}{Separator}");
             builder.Append($"{flight.TakeoffTime.ToString("HH:mm:ss")}");
 
