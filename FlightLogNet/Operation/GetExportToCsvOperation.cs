@@ -9,7 +9,7 @@ namespace FlightLogNet.Operation
     public class GetExportToCsvOperation(IFlightRepository flightRepository)
     {
         private const char Separator = ';';
-        private readonly string header = string.Join(Separator,
+        private readonly string header = $@"{string.Join(Separator,
             ReportLocalization.FlightIdColumn,
             ReportLocalization.DateColumn,
             ReportLocalization.TypeColumn,
@@ -19,9 +19,9 @@ namespace FlightLogNet.Operation
             ReportLocalization.TaskColumn,
             ReportLocalization.TakeoffTimeColumn,
             ReportLocalization.LandingTimeColumn,
-            ReportLocalization.FlightLengthColumn,
-            Environment.NewLine
-        );
+            ReportLocalization.FlightLengthColumn
+        )}
+";
 
         public byte[] Execute()
         {
@@ -48,24 +48,19 @@ namespace FlightLogNet.Operation
             builder.Append($"{flight.TakeoffTime.ToString("dd. MM. yyyy")}{Separator}");
             builder.Append($"{flight.Airplane.Type}{Separator}");
             builder.Append($"{flight.Airplane.Immatriculation}{Separator}");
-            builder.Append($"{flight.Pilot.LastName}, {flight.Pilot.FirstName}{Separator}");
-            if (!string.IsNullOrEmpty(flight.Copilot?.LastName) && !string.IsNullOrEmpty(flight.Copilot?.FirstName))
-            {
-                builder.Append($"{flight.Copilot.LastName}, {flight.Copilot.FirstName}");
-            }
-            else
-            {
-                builder.Append($"{flight.Copilot?.LastName ?? string.Empty}{flight.Copilot?.FirstName ?? string.Empty}");
-            }
-            builder.Append(Separator);
+            builder.Append($"{flight.Pilot.Fullname}{Separator}");
+            builder.Append($"{flight.Copilot?.Fullname}{Separator}");
             builder.Append($"{flight.Task}{Separator}");
-            builder.Append($"{flight.TakeoffTime.ToString("HH:mm:ss")}");
+            builder.Append($"{flight.TakeoffTime.ToString("HH:mm:ss")}{Separator}");
 
             if (flight.LandingTime != null)
             {
-                builder.Append(Separator);
                 builder.Append($"{flight.LandingTime.Value.ToString("HH:mm:ss")}{Separator}");
                 builder.Append($"{flight.LandingTime - flight.TakeoffTime}");
+            }
+            else
+            {
+                builder.Append(Separator);
             }
 
             builder.Append(Environment.NewLine);

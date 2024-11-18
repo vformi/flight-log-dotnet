@@ -58,8 +58,8 @@ namespace FlightLogNet.Tests.Operation
                     "Task",
                     "TakeoffTime",
                     "LandingTime",
-                    "Doba letu") + ";")
-                .AppendLine("1;18. 11. 2024;Towplane;T123;Doe, John;;Towing;10:00:00")
+                    "Doba letu"))
+                .AppendLine("1;18. 11. 2024;Towplane;T123;Doe, John;;Towing;10:00:00;;")
                 .AppendLine("2;18. 11. 2024;Glider;G456;Smith, Jane;Brown, Alice;Training;10:10:00;10:40:00;00:30:00")
                 .ToString();
 
