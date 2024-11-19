@@ -1,41 +1,55 @@
 ﻿namespace FlightLogNet.Integration
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using AutoMapper;
-
     using Models;
-
     using Microsoft.Extensions.Configuration;
+    using RestSharp;
 
-    public class ClubUserDatabase(IConfiguration configuration, IMapper mapper) : IClubUserDatabase
+    public class ClubUserDatabase : IClubUserDatabase
     {
-        // TODO 8.1: Přidejte si přes dependency injection configuraci
+        private readonly IConfiguration configuration;
+        private readonly IMapper mapper;
+
+        public ClubUserDatabase(IConfiguration configuration, IMapper mapper)
+        {
+            this.configuration = configuration;
+            this.mapper = mapper;
+        }
 
         public bool TryGetClubUser(long memberId, out PersonModel personModel)
         {
             personModel = this.GetClubUsers().FirstOrDefault(person => person.MemberId == memberId);
-
             return personModel != null;
         }
 
         public IList<PersonModel> GetClubUsers()
         {
-            IList<ClubUser> x = this.ReceiveClubUsers();
-            return this.TransformToPersonModel(x);
+            IList<ClubUser> clubUsers = this.ReceiveClubUsers();
+            return this.TransformToPersonModel(clubUsers);
         }
 
         private List<ClubUser> ReceiveClubUsers()
         {
-            // TODO 8.2: Naimplementujte volání endpointu ClubDB pomocí RestSharp
+            var client = new RestClient(this.configuration["ClubUsersApi"]);
+            var request = new RestRequest("club/user", Method.Get);
 
-            return null;
+            var response = client.Execute<List<ClubUser>>(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK && response.Data != null)
+            {
+                return response.Data;
+            }
+
+            throw new Exception($"Failed to fetch club users. HTTP Status: {response.StatusCode}, Error: {response.ErrorMessage}");
         }
 
         private List<PersonModel> TransformToPersonModel(IList<ClubUser> users)
         {
-            return null;
+            // automapper implementation
+            return users.Select(user => this.mapper.Map<PersonModel>(user)).ToList();
         }
     }
 }
