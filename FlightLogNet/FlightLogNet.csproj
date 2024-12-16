@@ -9,6 +9,7 @@
     <Version>1.0.24</Version>
     <Copyright>Profinit EU, s.r.o.</Copyright>
     <PackageProjectUrl>www.profinit.eu</PackageProjectUrl>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>

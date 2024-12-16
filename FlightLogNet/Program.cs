@@ -13,9 +13,9 @@ namespace FlightLogNet
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => 
-                {
-                    webBuilder.UseStartup<FlightLogNet.Startup>();
+                .ConfigureWebHostDefaults(webBuilder => {
+                    webBuilder.UseStartup<FlightLogNet.Startup>()
+                        .UseUrls("http://0.0.0.0:44313");
                 });
         }
     }
