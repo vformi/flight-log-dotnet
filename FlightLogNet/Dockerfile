@@ -1,6 +1,6 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 8080
+
 EXPOSE 44313
 
 ENV ASPNETCORE_URLS=http://0.0.0.0:44313
