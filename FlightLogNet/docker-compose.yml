@@ -8,5 +8,5 @@
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:44313
     volumes:
-      - ./local.db:/app/data/local.db
+      - ./local.db:/app/local.db
     restart: always
