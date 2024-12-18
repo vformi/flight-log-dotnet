@@ -8,6 +8,8 @@
 
         public string LastName { get; set; }
 
+        public string Fullname => $"{LastName}, {FirstName}";
+
         public AddressModel Address { get; set; }
     }
 }
